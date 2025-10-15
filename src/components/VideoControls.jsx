@@ -2,6 +2,14 @@ import { useState } from "react";
 import VideoButton from "./VideoButton";
 import styles from "@/App.module.scss";
 
+/* Icons */
+import volumeIcon from "@/assets/icons/volume.svg";
+import volumeCheckedIcon from "@/assets/icons/volume-checked.svg";
+import videoDownloadIcon from "@/assets/icons/video-download.svg";
+import videoDownloadCheckedIcon from "@/assets/icons/video-download-checked.svg";
+import checkDoneIcon from "@/assets/icons/check-done.svg";
+import checkDoneCheckedIcon from "@/assets/icons/check-done-checked.svg";
+
 function VideoControls({ whenDone, copyToClipboard, getVideoRef, videoData }) {
   const [toCheck, setToCheck] = useState({
     download: false,
@@ -37,8 +45,8 @@ function VideoControls({ whenDone, copyToClipboard, getVideoRef, videoData }) {
       <div className={styles["buttons-container"]}>
         <VideoButton
           icons={{
-            base: "src/assets/icons/volume.svg",
-            checked: "src/assets/icons/volume-checked.svg",
+            base: volumeIcon,
+            checked: volumeCheckedIcon,
           }}
           togglable={true}
           startChecked={true}
@@ -52,8 +60,8 @@ function VideoControls({ whenDone, copyToClipboard, getVideoRef, videoData }) {
         />
         <VideoButton
           icons={{
-            base: "src/assets/icons/video-download.svg",
-            checked: "src/assets/icons/video-download-checked.svg",
+            base: videoDownloadIcon,
+            checked: videoDownloadCheckedIcon,
           }}
           onClick={() => {
             setToCheck((prev) => ({ ...prev, download: true }));
@@ -63,8 +71,8 @@ function VideoControls({ whenDone, copyToClipboard, getVideoRef, videoData }) {
         />
         <VideoButton
           icons={{
-            base: "src/assets/icons/check-done.svg",
-            checked: "src/assets/icons/check-done-checked.svg",
+            base: checkDoneIcon,
+            checked: checkDoneCheckedIcon,
           }}
           onClick={() => {
             if (!toCheck.download) return false;

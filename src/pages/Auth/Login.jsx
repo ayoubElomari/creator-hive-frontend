@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import { loginWithEmail } from "@/api/auth";
 import styles from "./Auth.module.scss";
 
+/* Icons */
+import googleIcon from "@/assets/icons/auth/google-colored.svg";
+import eyeOpenIcon from "@/assets/icons/auth/eye-open.svg";
+import eyeClosedIcon from "@/assets/icons/auth/eye-closed.svg";
+
 function Login() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -58,7 +63,7 @@ function Login() {
           onClick={onGoogleLogin}
           className={styles["google-login-button"]}
         >
-          <img src="src/assets/icons/auth/google-colored.svg" alt="" />
+          <img src={googleIcon} alt="" />
           <span>Login with Google</span>
         </button>
         <div className={styles["separation-dot"]}></div>
@@ -98,14 +103,7 @@ function Login() {
                 className={styles["show-password"]}
                 onClick={() => setShowPassword(!showPassword)}
               >
-                <img
-                  src={
-                    showPassword
-                      ? "src/assets/icons/auth/eye-open.svg"
-                      : "src/assets/icons/auth/eye-closed.svg"
-                  }
-                  alt=""
-                />
+                <img src={showPassword ? eyeOpenIcon : eyeClosedIcon} alt="" />
               </div>
             </div>
           </div>
