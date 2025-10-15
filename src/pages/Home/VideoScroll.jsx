@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import CongratsScreen from "./CongratsScreen";
-import VideoControls from "@/components/videoControls";
+import VideoControls from "@/components/VideoControls";
 import styles from "@/App.module.scss";
 import { useAppContext } from "@/contexts/AppContext";
 import { VideoPlayer } from "../../components/VideoPlayer";
