@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import styles from "./Dashboard.module.scss";
 import "@/App.module.scss";
 import { useAppContext, Creator } from "@/contexts/AppContext";
+import { logout } from "@/api/auth";
 
 function Dashboard() {
   const { creator, videos, loading, error } = useAppContext();
@@ -21,8 +22,8 @@ function Dashboard() {
   }, []);
 
   // Handle logout
-  const handleLogout = () => {
-    window.location.href = "/logout";
+  const handleLogout = async () => {
+    await logout();
   };
 
   return (

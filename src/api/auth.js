@@ -29,3 +29,13 @@ export async function loginWithGoogle() {
   }
   return await res.json();
 }
+
+export async function logout() {
+  const res = await fetch(`${BASE}/api/logout`, {
+    credentials: "include",
+  });
+  if (!res.ok) {
+    return Promise.reject(new Error("Logout failed"));
+  }
+  return await res.json();
+}
