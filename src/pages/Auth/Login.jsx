@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { loginWithEmail } from "@/api/auth";
+import { loginWithEmail, loginWithGoogle } from "@/api/auth";
 import styles from "./Auth.module.scss";
 
 /* Icons */
@@ -12,9 +12,12 @@ function Login() {
   const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const onGoogleLogin = () => {
-    // Top-level navigation so the OAuth cookies/states behave nicely
-    window.location.href = "/api/login";
+  const handleLoginWithGoogle = async () => {
+    try {
+      await loginWithGoogle();
+    } catch (error) {
+      console.error("Google login failed:", error);
+    }
   };
 
   const handleLocalLogin = async (e) => {
@@ -60,7 +63,7 @@ function Login() {
       <div className={styles["auth-container"]}>
         <h2>Login</h2>
         <button
-          onClick={onGoogleLogin}
+          onClick={handleLoginWithGoogle}
           className={styles["google-login-button"]}
         >
           <img src={googleIcon} alt="" />

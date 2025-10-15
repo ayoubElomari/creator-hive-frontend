@@ -5,7 +5,7 @@ export async function me() {
   return r.json();
 }
 
-async function loginWithEmail(email, password) {
+export async function loginWithEmail(email, password) {
   const res = await fetch(`${BASE}/api/login/email`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -18,4 +18,14 @@ async function loginWithEmail(email, password) {
   }
   return await res.json();
 }
-export { loginWithEmail };
+
+export async function loginWithGoogle() {
+  const res = await fetch(`${BASE}/api/login`, {
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    return Promise.reject(new Error("Login failed"));
+  }
+  return await res.json();
+}
