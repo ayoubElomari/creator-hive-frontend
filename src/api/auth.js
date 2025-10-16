@@ -31,7 +31,7 @@ export async function loginWithGoogle() {
 }
 
 export async function logout() {
-  await fetch("/api/logout", {
+  await fetch(`${BASE}/api/logout`, {
     method: "POST",
     credentials: "include",
   });
