@@ -6,7 +6,7 @@ import path from "path";
 const API_BASE_URL =
   process.env.NODE_ENV === "production"
     ? "https://creator-hive-backend.onrender.com"
-    : "/api";
+    : "";
 
 export default defineConfig({
   define: {

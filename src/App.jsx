@@ -4,7 +4,7 @@ import { AppProvider } from "@/contexts/AppContext";
 import Home from "@/pages/Home/Home";
 import Login from "@/pages/Auth/Login";
 import Dashboard from "@/pages/Dashboard/Dashboard";
-import { useEffect } from "react";
+import { logout } from "@/api/auth";
 
 function ProtectedRoute({ auth, children }) {
   return auth ? children : <Navigate to="/auth" replace />;
@@ -12,15 +12,8 @@ function ProtectedRoute({ auth, children }) {
 function PublicRoute({ auth }) {
   return !auth ? <Login /> : <Navigate to="/" replace />;
 }
-function Logout() {
-  useEffect(() => {
-    fetch("/api/logout", {
-      method: "POST",
-      credentials: "include",
-    }).then(() => {
-      window.location.href = "/auth";
-    });
-  }, []);
+async function Logout() {
+  await logout();
 
   return <div>Logging out...</div>;
 }

@@ -31,11 +31,9 @@ export async function loginWithGoogle() {
 }
 
 export async function logout() {
-  const res = await fetch(`${BASE}/api/logout`, {
+  await fetch("/api/logout", {
+    method: "POST",
     credentials: "include",
   });
-  if (!res.ok) {
-    return Promise.reject(new Error("Logout failed"));
-  }
-  return await res.json();
+  window.location.href = "/auth";
 }
