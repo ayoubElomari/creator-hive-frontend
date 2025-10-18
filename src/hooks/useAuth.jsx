@@ -1,27 +1,35 @@
 import { useEffect, useState } from "react";
-import { me } from "@/api/auth";
 
 export function useAuth() {
-  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function check() {
-      try {
-        const data = await me();
+  async function checkAuth(retry = false) {
+    try {
+      const res = await fetch("/api/me", { credentials: "include" });
+      const data = await res.json();
 
-        if (data.authenticated) {
-          setUser(data); // Contains email + google_id
+      if (data.authenticated) {
+        setUser(data);
+        setLoading(false);
+      } else {
+        if (!retry) {
+          // ✅ Retry once after a delay (helps with incognito cookie propagation)
+          setTimeout(() => checkAuth(true), 350);
         } else {
+          // ✅ Final attempt failed
           setUser(null);
+          setLoading(false);
         }
-      } catch (err) {
-        console.error("Failed to check auth", err);
-        setUser(null);
       }
+    } catch (err) {
+      setUser(null);
       setLoading(false);
     }
-    check();
+  }
+
+  useEffect(() => {
+    checkAuth();
   }, []);
 
   return { user, loading };
